@@ -7,7 +7,7 @@ import { syncUser } from "@/actions/user.action";
 async function Navbar() {
   // taking the user and saving to database
   const user = await currentUser();
-  if (user) await syncUser();
+  if (user) await syncUser(); // POST Request
 
   // creating the navbar
   return (
