@@ -5,6 +5,7 @@
 import prisma from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
+// updates database with current user
 export async function syncUser() {
   try {
     const { userId } = await auth();
@@ -44,6 +45,7 @@ export async function syncUser() {
   }
 }
 
+// grabs the user by the clerk id
 export async function getUserByClerkId(clerkId: string) {
   return prisma.user.findUnique({
     where: {
@@ -61,4 +63,19 @@ export async function getUserByClerkId(clerkId: string) {
       },
     },
   });
+}
+
+// utility function
+export async function getDbUserId() {
+  // comparing current user id to clerk database id
+  const { userId: clerkId } = await auth();
+  // no match means return error
+  if (!clerkId) throw new Error("Unauthorised");
+
+  // return the user id
+  const user = await getUserByClerkId(clerkId);
+  // no user id found returns error
+  if (!user) throw new Error("User not found");
+
+  return user.id;
 }
