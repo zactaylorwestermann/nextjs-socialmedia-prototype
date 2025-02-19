@@ -22,7 +22,7 @@ function CreatePost() {
     if (!content.trim() && !imageUrl) return; // no content or image in post -> return
     try {
       const result = await createPost(content, imageUrl);
-      if (result.success) {
+      if (result?.success) {
         // reset post component upon successful post
         setContent("");
         setImageUrl("");
