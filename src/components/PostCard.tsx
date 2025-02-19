@@ -191,11 +191,11 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
             </Button>
           </div>
 
-          {/* COMMENTS SECTION */}
+          {/* comments */}
           {showComments && (
             <div className="space-y-4 pt-4 border-t">
               <div className="space-y-4">
-                {/* DISPLAY COMMENTS */}
+                {/* display comments */}
                 {post.comments.map((comment) => (
                   <div key={comment.id} className="flex space-x-3">
                     <Avatar className="size-8 flex-shrink-0">
